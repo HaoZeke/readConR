@@ -16,5 +16,8 @@ dependencies:
   - r-rcpp
   - r-arrow
   - r-devtools
+  # For linting
+  - r-styler
+  - r-lintr
   # Interactive R
   - radian
