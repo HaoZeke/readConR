@@ -3,10 +3,10 @@ OS=$(uname -s)
 
 if [ "$OS" = "Darwin" ]; then
   echo 'Configuring for macOS...'
-  # macOS-specific configuration commands here...
+  LIB_EXT="dylib"
 elif [ "$OS" = "Linux" ]; then
   echo 'Configuring for Linux...'
-  # Linux-specific configuration commands here...
+  LIB_EXT="so"
 else
   echo "Unknown OS type: $OS"
   exit 1
