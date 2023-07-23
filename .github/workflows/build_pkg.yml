@@ -38,10 +38,22 @@ jobs:
           environment-file: environment.yml
           cache-environment: true
 
-      # - name: Check
-      #   shell: bash -l {0}
-      #   run: Rscript -e 'devtools::check(args = c("--no-manual", "--as-cran"), error_on = "error")'
-
       - name: Build and install
         shell: bash -l {0}
         run: Rscript -e 'devtools::install(".")'
+
+      - name: Test run
+        shell: bash -l {0}
+        run: |
+          Rscript -e '
+          library("readConR")
+          aa <- readConR::readCon("test_data/cuh2.con")
+          print(aa$prebox_header)
+          print(aa$boxl)
+          print(aa$angles)
+          print(aa$postbox_header)
+          print(aa$natm_types)
+          print(aa$natms_per_type)
+          print(aa$masses_per_type)
+          print(aa$atom_data)
+          '
