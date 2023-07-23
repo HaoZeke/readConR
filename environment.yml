@@ -8,6 +8,7 @@ channels:
   - conda-forge
 dependencies:
   - compilers
+  - clang
   - meson
   - cmake
   - pkg-config
