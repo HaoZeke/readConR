@@ -68,7 +68,7 @@ jobs:
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
-        run: devtools::check(args = c("--no-manual", "--as-cran"), error_on = "warning")
+        run: devtools::check(args = c("--no-manual", "--as-cran"), error_on = "error")
         shell: Rscript {0}
 
       - name: Upload check results

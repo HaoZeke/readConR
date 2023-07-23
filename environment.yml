@@ -14,10 +14,10 @@ dependencies:
   - arrow-cpp
   # For the R bindings
   - r-rcpp
-  - r-arrow
   - r-devtools
   # For linting
   - r-styler
   - r-lintr
+  - r-codemeta
   # Interactive R
   - radian
