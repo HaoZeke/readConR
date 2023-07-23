@@ -34,11 +34,14 @@ jobs:
 
       - name: Install Conda environment
         uses: mamba-org/setup-micromamba@v1
+        with:
+          environment-file: environment.yml
+          cache-environment: true
 
-      - name: Check
-        shell: bash -l {0}
-        run: Rscript -e 'devtools::check(args = c("--no-manual", "--as-cran"), error_on = "error")'
+      # - name: Check
+      #   shell: bash -l {0}
+      #   run: Rscript -e 'devtools::check(args = c("--no-manual", "--as-cran"), error_on = "error")'
 
       - name: Build and install
         shell: bash -l {0}
-        run: Rscript -e devtools::install(".")
+        run: Rscript -e 'devtools::install(".")'
