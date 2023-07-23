@@ -8,10 +8,9 @@
 #include "include/helpers/StringHelpers.hpp"
 
 #include <Rcpp.h>
-using namespace Rcpp;
 
 // [[Rcpp::export]]
-Rcpp::DataFrame readCon(std::string filename) {
+Rcpp::List readCon(std::string filename) {
   std::vector<std::string> fconts =
       yodecon::helpers::file::read_con_file(filename);
   yodecon::types::ConFrame tmp;
@@ -42,5 +41,16 @@ Rcpp::DataFrame readCon(std::string filename) {
       Rcpp::_["is_fixed"] = isFixedVector, Rcpp::_["atom_id"] = atomIdVector,
       Rcpp::_["stringsAsFactors"] = true);
 
-  return df;
+  Rcpp::List conFrame = Rcpp::List::create(
+      Rcpp::Named("prebox_header") =
+          yodecon::helpers::string::to_csv_string(tmp.prebox_header),
+      Rcpp::Named("boxl") = tmp.boxl, Rcpp::Named("angles") = tmp.angles,
+      Rcpp::Named("postbox_header") =
+          yodecon::helpers::string::to_csv_string(tmp.postbox_header),
+      Rcpp::Named("natm_types") = tmp.natm_types,
+      Rcpp::Named("natms_per_type") = tmp.natms_per_type,
+      Rcpp::Named("masses_per_type") = tmp.masses_per_type,
+      Rcpp::Named("atom_data") = df);
+  conFrame.attr("class") = "conFrame";
+  return conFrame;
 }

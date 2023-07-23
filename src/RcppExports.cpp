@@ -11,7 +11,7 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // readCon
-List readCon(std::string filename);
+Rcpp::List readCon(std::string filename);
 RcppExport SEXP _readConR_readCon(SEXP filenameSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
