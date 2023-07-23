@@ -10,6 +10,7 @@ dependencies:
   - compilers
   - clang
   - meson
+  - ninja
   - cmake
   - pkg-config
   # Backports away from C++20
