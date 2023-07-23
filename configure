@@ -1,0 +1,36 @@
+# Handle extension
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        # Linux
+        LIB_EXT="so"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+        # Mac OSX
+        LIB_EXT="dylib"
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+        # POSIX compatibility layer and Linux environment emulation for Windows
+        LIB_EXT="dll"
+elif [[ "$OSTYPE" == "msys" ]]; then
+        # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
+        LIB_EXT="dll"
+elif [[ "$OSTYPE" == "win32" ]]; then
+        # I'm not sure this can happen.
+        LIB_EXT="dll"
+elif [[ "$OSTYPE" == "freebsd"* ]]; then
+        # FreeBSD
+        LIB_EXT="so"
+else
+        # Unknown.
+        echo "Unknown OS type: $OSTYPE"
+        exit 1
+fi
+
+cd readCon
+meson setup bbdir
+meson compile -C bbdir
+
+# Then use $LIB_EXT in the rest of your script
+cp "bbdir/CppCore/libreadcon.$LIB_EXT" ../src/
+
+# Emacs Stuff (cross platform)
+# Local Variables:
+# mode: shell-script
+# End:
