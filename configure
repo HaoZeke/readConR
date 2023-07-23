@@ -1,3 +1,21 @@
+# Sanity checks
+if [ -n "$READCON_INSTALL_ROOT" ]
+then
+    # READCON_INSTALL_ROOT is set, so use it
+    INSTALL_PREFIX="$READCON_INSTALL_ROOT"
+    echo "Using READCON_INSTALL_ROOT as the installation prefix: $INSTALL_PREFIX"
+else
+    # READCON_INSTALL_ROOT is not set, so use CONDA_PREFIX
+    INSTALL_PREFIX="$CONDA_PREFIX"
+    echo "READCON_INSTALL_ROOT is not set. Using CONDA_PREFIX as the installation prefix: $INSTALL_PREFIX"
+fi
+
+# Check if INSTALL_PREFIX is set and non-empty
+if [ -z "$INSTALL_PREFIX" ]
+then
+    echo "Error: neither READCON_INSTALL_ROOT nor CONDA_PREFIX is set. Please set one of these environment variables."
+    exit 1
+fi
 # Handle extension
 OS=$(uname -s)
 
@@ -13,8 +31,8 @@ else
 fi
 
 cd readCon
-meson setup bbdir
-meson compile -C bbdir
+meson setup bbdir --prefix $INSTALL_PREFIX
+meson install -C bbdir
 
 # Then use $LIB_EXT in the rest of your script
 cp "bbdir/CppCore/libreadcon.$LIB_EXT" ../src/
