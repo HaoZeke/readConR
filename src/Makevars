@@ -9,10 +9,10 @@ else
     LIB_EXT = so
 endif
 
+# Needed for readCon
+CXX_STD = CXX20
 # On macos, with conda, we need disable_availability
 # https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
-PKG_CPPFLAGS = -I./../readCon/CppCore -D_LIBCPP_DISABLE_AVAILABILITY
+PKG_CPPFLAGS = -I./../readCon/CppCore -D_LIBCPP_DISABLE_AVAILABILITY -std=c++2a
 PKG_LDLIBS = -lreadcon
 PKG_LIBS = ./libreadcon.$(LIB_EXT)
-# Needed for readCon
-PKG_CXX_STD = CXX20

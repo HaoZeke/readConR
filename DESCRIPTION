@@ -9,3 +9,4 @@ Description: A tool for computational chemistry.
 License: MIT
 Imports: Rcpp (>= 1.0.11)
 LinkingTo: Rcpp
+SystemRequirements: C++20
