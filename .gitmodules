@@ -1,0 +1,3 @@
+[submodule "readCon"]
+	path = readCon
+	url = git@github.com:HaoZeke/readCon
