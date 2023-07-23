@@ -29,6 +29,6 @@ Maintainer: Rohit Goswami <rog32@hi.is>
 \examples{
   \dontrun{
      ## Optional simple examples of the most important functions
-     ## These can be in \dontrun{} and \donttest{} blocks.   
+     ## These can be in \dontrun{} and \donttest{} blocks.
   }
 }
