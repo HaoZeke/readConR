@@ -1,0 +1,4 @@
+CXX_STD = CXX20
+PKG_CPPFLAGS = -D_LIBCPP_DISABLE_AVAILABILITY -I${HOME}/Git/Github/CPP/readCon/CppCore
+PKG_LDLIBS = -lreadcon
+PKG_LIBS = ${HOME}/Git/Github/CPP/readCon/bbdir/CppCore/libreadcon.dylib

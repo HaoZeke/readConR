@@ -10,19 +10,20 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// rcpp_hello_world
-List rcpp_hello_world();
-RcppExport SEXP _readConR_rcpp_hello_world() {
+// readCon
+List readCon(std::string filename);
+RcppExport SEXP _readConR_readCon(SEXP filenameSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpp_hello_world());
+    Rcpp::traits::input_parameter< std::string >::type filename(filenameSEXP);
+    rcpp_result_gen = Rcpp::wrap(readCon(filename));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_readConR_rcpp_hello_world", (DL_FUNC) &_readConR_rcpp_hello_world, 0},
+    {"_readConR_readCon", (DL_FUNC) &_readConR_readCon, 1},
     {NULL, NULL, 0}
 };
 
