@@ -15,7 +15,7 @@ Rcpp::List readCon(std::string filename) {
       yodecon::helpers::file::read_con_file(filename);
   yodecon::types::ConFrame tmp;
   yodecon::process_header(
-      (fconts | std::views::take(yodecon::constants::HeaderLength)), tmp);
+      (fconts | ranges::views::take(yodecon::constants::HeaderLength)), tmp);
   yodecon::process_coordinates(fconts, tmp);
 
   // Create vectors for each field

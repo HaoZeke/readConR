@@ -12,7 +12,9 @@ dependencies:
   - meson
   - cmake
   - pkg-config
-  - arrow-cpp
+  # Backports away from C++20
+  - range-v3
+  - fmt==9.1.0
   # For the R bindings
   - r-rcpp
   - r-devtools
