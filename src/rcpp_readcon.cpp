@@ -35,10 +35,8 @@ Rcpp::List readCon(std::string filename) {
 
   // Create a DataFrame with the vectors
   Rcpp::DataFrame df = Rcpp::DataFrame::create(
-      Rcpp::_["symbol"] = symbolVector,
-      Rcpp::_["atmNum"] = atmNumVector,
-      Rcpp::_["x"] = xVector,
-      Rcpp::_["y"] = yVector, Rcpp::_["z"] = zVector,
+      Rcpp::_["symbol"] = symbolVector, Rcpp::_["atmNum"] = atmNumVector,
+      Rcpp::_["x"] = xVector, Rcpp::_["y"] = yVector, Rcpp::_["z"] = zVector,
       Rcpp::_["is_fixed"] = isFixedVector, Rcpp::_["atom_id"] = atomIdVector,
       Rcpp::_["stringsAsFactors"] = false);
 
