@@ -1,7 +1,7 @@
 [wrap-git]
 directory=readCon
 url=https://github.com/HaoZeke/readCon.git
-revision=88445cd
+revision=aafe580
 
 [provide]
 readcon=git
