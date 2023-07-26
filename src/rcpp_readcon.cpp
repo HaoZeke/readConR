@@ -30,7 +30,7 @@ Rcpp::List readCon(std::string filename) {
     atomIdVector.push_back(atomDatum.atom_id);
   }
 
-  std::vector<size_t> atmNumVector;
+  std::vector<int> atmNumVector;
   atmNumVector = yodecon::symbols_to_atomic_numbers(symbolVector);
 
   // Create a DataFrame with the vectors
