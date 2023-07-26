@@ -18,7 +18,7 @@ Rcpp::List readCon(std::string filename) {
   std::vector<std::string> symbolVector;
   std::vector<double> xVector, yVector, zVector;
   std::vector<bool> isFixedVector;
-  std::vector<uint64_t> atomIdVector;
+  std::vector<int> atomIdVector;
 
   // Iterate through the data and append it to the vectors
   for (const auto &atomDatum : tmp.atom_data) {
@@ -30,12 +30,13 @@ Rcpp::List readCon(std::string filename) {
     atomIdVector.push_back(atomDatum.atom_id);
   }
 
-  std::vector<int> atmNumVector;
-  atmNumVector = yodecon::symbols_to_atomic_numbers(symbolVector);
+  auto atmNumVector = yodecon::symbols_to_atomic_numbers(symbolVector);
+  // Convert atmNumVector to IntegerVector
+  Rcpp::IntegerVector atmNumVectorRcpp = Rcpp::wrap(atmNumVector);
 
   // Create a DataFrame with the vectors
   Rcpp::DataFrame df = Rcpp::DataFrame::create(
-      Rcpp::_["symbol"] = symbolVector, Rcpp::_["atmNum"] = atmNumVector,
+      Rcpp::_["symbol"] = symbolVector, Rcpp::_["atmNum"] = atmNumVectorRcpp,
       Rcpp::_["x"] = xVector, Rcpp::_["y"] = yVector, Rcpp::_["z"] = zVector,
       Rcpp::_["is_fixed"] = isFixedVector, Rcpp::_["atom_id"] = atomIdVector,
       Rcpp::_["stringsAsFactors"] = false);
