@@ -20,7 +20,7 @@ aa$atom_data
 #+begin_src bash
 micromamba create -f environment.yml
 micromamba activate readconr_dev
-RScript -e 'devtools::install(".")'
+Rscript -e 'devtools::install(".")'
 #+end_src
 *** Local Linting
 A ~pre-commit~ job is setup on CI to enforce consistent styles, so it is best to
