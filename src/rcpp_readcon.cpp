@@ -9,36 +9,16 @@
 Rcpp::List readCon(std::string filename) {
   std::vector<std::string> fconts =
       yodecon::helpers::file::read_con_file(filename);
-  yodecon::types::ConFrame tmp;
-  yodecon::process_header(
-      (fconts | ranges::views::take(yodecon::constants::HeaderLength)), tmp);
-  yodecon::process_coordinates(fconts, tmp);
-
-  // Create vectors for each field
-  std::vector<std::string> symbolVector;
-  std::vector<double> xVector, yVector, zVector;
-  std::vector<bool> isFixedVector;
-  std::vector<int> atomIdVector;
-
-  // Iterate through the data and append it to the vectors
-  for (const auto &atomDatum : tmp.atom_data) {
-    symbolVector.push_back(atomDatum.symbol);
-    xVector.push_back(atomDatum.x);
-    yVector.push_back(atomDatum.y);
-    zVector.push_back(atomDatum.z);
-    isFixedVector.push_back(atomDatum.is_fixed);
-    atomIdVector.push_back(atomDatum.atom_id);
-  }
-
-  auto atmNumVector = yodecon::symbols_to_atomic_numbers(symbolVector);
+  auto tmp = yodecon::create_single_con<yodecon::types::ConFrameVec>(fconts);
+  auto atmNumVector = yodecon::symbols_to_atomic_numbers(tmp.symbol);
   // Convert atmNumVector to IntegerVector
   Rcpp::IntegerVector atmNumVectorRcpp = Rcpp::wrap(atmNumVector);
 
   // Create a DataFrame with the vectors
   Rcpp::DataFrame df = Rcpp::DataFrame::create(
-      Rcpp::_["symbol"] = symbolVector, Rcpp::_["atmNum"] = atmNumVectorRcpp,
-      Rcpp::_["x"] = xVector, Rcpp::_["y"] = yVector, Rcpp::_["z"] = zVector,
-      Rcpp::_["is_fixed"] = isFixedVector, Rcpp::_["atom_id"] = atomIdVector,
+      Rcpp::_["symbol"] = tmp.symbol, Rcpp::_["atmNum"] = atmNumVectorRcpp,
+      Rcpp::_["x"] = tmp.x, Rcpp::_["y"] = tmp.y, Rcpp::_["z"] = tmp.z,
+      Rcpp::_["is_fixed"] = tmp.is_fixed, Rcpp::_["atom_id"] = tmp.atom_id,
       Rcpp::_["stringsAsFactors"] = false);
 
   Rcpp::List conFrame = Rcpp::List::create(
